@@ -2,23 +2,22 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import re
 
 TYPE = "IMSI"
-
+PORT = 8585
 
 def check_header(value):
-    print('checking checking')
-    if value is None:
-        raise Exception('No such header')
-    if len(value) not in range(1, 16):
-        raise Exception('Invalid length')
-    if not re.match("^[a-zA-Z0-9_]*$", value):
-        raise Exception('Header includes invalid symbols')
+    # if value is None:
+    #     raise Exception('No such header')
+    # if len(value) not in range(1, 16):
+    #     raise Exception('Invalid length\n')
+    # if not re.match("^[a-zA-Z0-9_]*$", value):
+    #     raise Exception('Header includes invalid symbols')
+    if not re.match("[\w_]{1,15}$", value):
+        raise Exception('Ohohoh there is a problem\n')
 
 
 class Serv(BaseHTTPRequestHandler):
     def do_GET(self):
-        req_headers = self.headers
-        print(req_headers)
-
+        print(self.headers)
         try:
             imsi_header = self.headers.get(TYPE)
             check_header(imsi_header)
@@ -33,5 +32,5 @@ class Serv(BaseHTTPRequestHandler):
         self.wfile.write(bytes(msg, 'utf-8'))
 
 
-httpd = HTTPServer(('localhost', 8585), Serv)
+httpd = HTTPServer(('localhost', PORT), Serv)
 httpd.serve_forever()
