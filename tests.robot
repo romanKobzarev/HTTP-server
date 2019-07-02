@@ -10,7 +10,7 @@ Library	  RequestsLibrary
 
 Force Tags  http-server-test    owner-romanKobzarev
 
-Test Template     Status response with ${header_value} should be equal ${expected_code}
+Test Template     Send Request And Compare Status Code
 
 Suite Setup       Start Server
 Suite Teardown    Terminate All Processes    kill=True
@@ -20,7 +20,11 @@ ${STATUS_OK}        200
 ${STATUS_NOT_OK}    500
 ${HEADER_KEY}       IMSI
 
-*** Test Cases ***                      HEADER_VALUE        STATUS_CODE
+# TODO:
+# change names of boundery conditions TC
+# change suite teardown
+
+*** Test Cases ***                      HEADER_VALUE        STATUS_CODE             HEADER_KEY
 
 Test With Correct Header                gjdhtyk_1235        ${STATUS_OK}
 Test With Only Alphabet                 acgfhd              ${STATUS_OK}
@@ -34,27 +38,17 @@ Boundary Conditions Test 2              bb                  ${STATUS_OK}
 Boundary Conditions Test 14             dfhgn__3571824      ${STATUS_OK}
 Boundary Conditions Test 15             891122284567516     ${STATUS_OK}
 Boundary Conditions Test 16             1293138193812938    ${STATUS_NOT_OK}
+Test With Incorrect Header Key          abc_123             ${STATUS_NOT_OK}        header_key=ISMI
+Test Without Header                     ${null}             ${STATUS_NOT_OK}        header_key=${null}
 
-#Test With Incorrect Header Key
-#    ${header}    create dictionary  ImSI  dfgghjk
-#    ${response}  get request     localhost  ${EMPTY}
-#    should be equal as Strings  ${response.status_code}  ${STATUS_NOT_OK}
-#
-#Test Without Header
-#    ${response}  get request     localhost  ${EMPTY}
-#    should be equal as Strings  ${response.status_code}  ${STATUS_NOT_OK}
-
-#Test WIth Several Headers
-#    ${header}  create dictionary  RomaNika  status satus  FlexKex  WeloveGames  ${HEADER_KEY}  RightISMI
-#    ${response}  get request  localhost  ${EMPTY}  headers=${header}
-#    should be equal as strings  ${response.status_code}  ${STATUS_OK}
 
 *** Keywords ***
 Start Server
     Start Process  python3  ./http_server.py
     create session  localhost  http://localhost:8585
 
-Status response with ${header_value} should be equal ${expected_code}
-    ${header}   create dictionary  ${HEADER_KEY}    ${header_value}
+Send Request And Compare Status Code
+    [Arguments]  ${header_value}  ${expected_code}  ${header_key}=${HEADER_KEY}
+    ${header}   run keyword if  '${header_key}'!='${null}'   create dictionary  ${header_key}    ${header_value}
     ${response}  get request  localhost  ${EMPTY}  headers=${header}
     should be equal as strings  ${response.status_code}  ${expected_code}

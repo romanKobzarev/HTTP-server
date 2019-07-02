@@ -21,7 +21,7 @@ class Serv(BaseHTTPRequestHandler):
         try:
             imsi_header = self.headers.get(TYPE)
             check_header(imsi_header)
-            msg = 'Header is correct!'
+            msg = 'Header is correct!\n'
             self.send_response(200)
         except Exception as e:
             print(e)
