@@ -20,10 +20,6 @@ ${STATUS_OK}        200
 ${STATUS_NOT_OK}    500
 ${HEADER_KEY}       IMSI
 
-# TODO:
-# change names of boundery conditions TC
-# change suite teardown
-
 *** Test Cases ***                                  HEADER_VALUE        STATUS_CODE             HEADER_KEY
 
 Test With Correct Header Value                      gjdhtyk_1235        ${STATUS_OK}
