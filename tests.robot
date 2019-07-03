@@ -24,22 +24,22 @@ ${HEADER_KEY}       IMSI
 # change names of boundery conditions TC
 # change suite teardown
 
-*** Test Cases ***                      HEADER_VALUE        STATUS_CODE             HEADER_KEY
+*** Test Cases ***                                  HEADER_VALUE        STATUS_CODE             HEADER_KEY
 
-Test With Correct Header                gjdhtyk_1235        ${STATUS_OK}
-Test With Only Alphabet                 acgfhd              ${STATUS_OK}
-Test With Only Number                   123123141           ${STATUS_OK}
-Test With Long Header Value             asdkljsalkasjdlask  ${STATUS_NOT_OK}
-Test With Space In Header               asdk${SPACE}sda     ${STATUS_NOT_OK}
-Test With Other Symbol In Header        asd:asd;sad         ${STATUS_NOT_OK}
-Boundary Conditions Test 0              ${EMPTY}            ${STATUS_NOT_OK}
-Boundary Conditions Test 1              1                   ${STATUS_OK}
-Boundary Conditions Test 2              bb                  ${STATUS_OK}
-Boundary Conditions Test 14             dfhgn__3571824      ${STATUS_OK}
-Boundary Conditions Test 15             891122284567516     ${STATUS_OK}
-Boundary Conditions Test 16             1293138193812938    ${STATUS_NOT_OK}
-Test With Incorrect Header Key          abc_123             ${STATUS_NOT_OK}        header_key=ISMI
-Test Without Header                     ${null}             ${STATUS_NOT_OK}        header_key=${null}
+Test With Correct Header                            gjdhtyk_1235        ${STATUS_OK}
+Test With Only Alphabet                             acgfhd              ${STATUS_OK}
+Test With Only Number                               123123141           ${STATUS_OK}
+Test With Long Header Value                         asdkljsalkasjdlask  ${STATUS_NOT_OK}
+Test With Space In Header                           asdk${SPACE}sda     ${STATUS_NOT_OK}
+Test With Other Symbol In Header                    asd:asd;sad         ${STATUS_NOT_OK}
+Boundary Conditions Test With No Symbols            ${EMPTY}            ${STATUS_NOT_OK}
+Boundary Conditions Test With 1 Symbol              1                   ${STATUS_OK}
+Boundary Conditions Test With 2 Symbols             bb                  ${STATUS_OK}
+Boundary Conditions Test With 14 Symbols            dfhgn__3571824      ${STATUS_OK}
+Boundary Conditions Test With 15 Symbols            891122284567516     ${STATUS_OK}
+Boundary Conditions Test With 16 Symbols            1293138193812938    ${STATUS_NOT_OK}
+Test With Incorrect Header Key                      abc_123             ${STATUS_NOT_OK}        header_key=ISMI
+Test Without Header                                 ${null}             ${STATUS_NOT_OK}        header_key=${null}
 
 
 *** Keywords ***
