@@ -26,12 +26,12 @@ ${HEADER_KEY}       IMSI
 
 *** Test Cases ***                                  HEADER_VALUE        STATUS_CODE             HEADER_KEY
 
-Test With Correct Header                            gjdhtyk_1235        ${STATUS_OK}
-Test With Only Alphabet                             acgfhd              ${STATUS_OK}
+Test With Correct Header Value                      gjdhtyk_1235        ${STATUS_OK}
+Test With Only Letter                               acgfhd              ${STATUS_OK}
 Test With Only Number                               123123141           ${STATUS_OK}
 Test With Long Header Value                         asdkljsalkasjdlask  ${STATUS_NOT_OK}
 Test With Space In Header                           asdk${SPACE}sda     ${STATUS_NOT_OK}
-Test With Other Symbol In Header                    asd:asd;sad         ${STATUS_NOT_OK}
+Test With Wrong Symbol In Header                    asd:asd;sad         ${STATUS_NOT_OK}
 Boundary Conditions Test With No Symbols            ${EMPTY}            ${STATUS_NOT_OK}
 Boundary Conditions Test With 1 Symbol              1                   ${STATUS_OK}
 Boundary Conditions Test With 2 Symbols             bb                  ${STATUS_OK}
